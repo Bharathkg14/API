@@ -1,10 +1,8 @@
-SELECT column_name, data_type, is_nullable
-FROM COMM_DEV.INFORMATION_SCHEMA.COLUMNS
-WHERE table_schema = 'GOLD'
-  AND table_name   = 'FIELD_ACTIVITY_METRIC'
-ORDER BY ordinal_position;
+Need admin to create CORTEX_POC DB (request sent)
 
 
-Use Case	Technique	Output
-UC1: Smart Metadata Insights	Cortex LLM (COMPLETE)	Daily AI-generated insights on freshness, growth, usage, quality
-UC2: Anomaly Detection	Cortex ML (ANOMALY_DETECTION)	Daily anomaly flags on row count, avg metric value + AI explanations
+Isolation. We’re running AI functions that generate new tables, views, and ML models. Doing this in a dedicated CORTEX_POC database means:
+
+Zero risk to production — no accidental writes to COMM_DEV.GOLD
+Easy cleanup — drop one database when POC ends, no orphan objects
+Clear ownership — my role owns it, no permission conflicts with shared schemas
